@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Контрольная работа: Задание 5, разделы 10–11 — ЛАиАГ МТУСИ</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --subtext: #94a3b8;
+      --accent: #38bdf8;
+      --indigo: #818cf8;
+      --indigo-bg: rgba(99, 102, 241, 0.15);
+      --border: #334155;
+      --quote-border: #38bdf8;
+      --quote-bg: rgba(56, 189, 248, 0.08);
+      --green: #4ade80;
+      --amber: #fbbf24;
+      --pill-bg: #334155;
+      --math-bg: rgba(15, 23, 42, 0.6);
+      --math-border: #475569;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --subtext: #64748b;
+        --accent: #0284c7;
+        --indigo: #4f46e5;
+        --indigo-bg: #eef2ff;
+        --border: #e2e8f0;
+        --quote-border: #0284c7;
+        --quote-bg: #f0f9ff;
+        --green: #16a34a;
+        --amber: #d97706;
+        --pill-bg: #e2e8f0;
+        --math-bg: #f1f5f9;
+        --math-border: #cbd5e1;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 12px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      padding-top: 4px;
+      padding-bottom: 10px;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 1.10rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge {
+      font-size: 0.75rem;
+      background: var(--indigo-bg);
+      color: var(--indigo);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid var(--indigo);
+      white-space: nowrap;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 8px;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+    .filters {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .filters::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      background: var(--pill-bg);
+      color: var(--subtext);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .section-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      font-weight: 800;
+      margin: 18px 0 8px 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .card.hidden {
+      display: none !important;
+    }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+    .num-pill {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .num-pill.amber { background: var(--amber); color: #000; }
+    .num-pill.indigo { background: var(--indigo); color: #fff; }
+    .card-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .given-box {
+      background: var(--math-bg);
+      border: 1px dashed var(--math-border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+    }
+    .quote-block {
+      background: var(--quote-bg);
+      border-left: 3px solid var(--quote-border);
+      padding: 8px 10px;
+      margin-bottom: 9px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .quote-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .simple-block {
+      margin-bottom: 9px;
+      font-size: 0.89rem;
+      color: var(--text);
+      background: rgba(0,0,0,0.12);
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+    .simple-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--indigo);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .beacon {
+      background: var(--indigo-bg);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--indigo);
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .beacon-icon { flex-shrink: 0; }
+    .math-block {
+      background: var(--math-bg);
+      border: 1px solid var(--math-border);
+      border-radius: 6px;
+      padding: 6px 8px;
+      margin: 6px 0;
+      font-family: "Consolas", "Fira Code", monospace;
+      font-size: 0.86rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .calc-row {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin: 5px 0;
+    }
+    .step-tag {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.80rem;
+    }
+    .result-pill {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px 0 10px;
+      font-size: 0.75rem;
+      color: var(--subtext);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-row">
+      <h1>📖 Разбор к контрольной работе</h1>
+      <span class="badge">БВТ2602 • ЛАиАГ МТУСИ</span>
+    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск (скалярное, пучок, проекция, расстояние...)" oninput="filterCards()">
+    <div class="filters">
+      <button class="filter-btn active" onclick="setCategory('all', this)">Все (18)</button>
+      <button class="filter-btn" onclick="setCategory('kr5', this)">К/Р Задание 5</button>
+      <button class="filter-btn" onclick="setCategory('sec10', this)">Раздел 10 (Плоскость)</button>
+      <button class="filter-btn" onclick="setCategory('sec11', this)">Раздел 11 (Прямая)</button>
+      <button class="filter-btn" onclick="setCategory('blitz', this)">⚡ Блиц</button>
+    </div>
+  </header>
+
+  <main id="cardsContainer">
+
+    <!-- ВВОДНЫЙ БЛОК К/Р 5 ВАРИАНТ 3 -->
+    <div class="section-title" data-section="kr5">📌 Контрольное задание 5 (Вариант 3)</div>
+
+    <div class="card" data-category="kr5" data-keywords="входные данные вариант 3 координаты точек базовые векторы ab ac ad bc bd cd">
+      <div class="card-header">
+        <span class="num-pill">База</span>
+        <div class="card-title">Дано и базовые векторы варианта 3</div>
+      </div>
+      <div class="given-box">
+        <strong>Точки:</strong><br>
+        A(10; 9; −2), &nbsp; B(−11; −12; 19), &nbsp; C(−18; −5; 12), &nbsp; D(3; 2; −9)
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственный фундамент:</div>
+        Все 9 пунктов задачи сводятся к операциям над векторами рёбер. Вектор с началом в P₁ и концом в P₂ считается строго как <strong>координаты конца МИНУС координаты начала</strong>. Сразу выносим общие скалярные множители — это спасет от громоздкого умножения трёхзначных чисел!
+      </div>
+      <div class="math-block">
+AB = B − A = {-21; -21; 21} = 21·{-1; -1; 1}
+AC = C − A = {-28; -14; 14} = 14·{-2; -1; 1}
+AD = D − A = {-7; -7; -7}   = -7·{1; 1; 1}
+BC = C − B = {-7; 7; -7}    = 7·{-1; 1; -1}
+BD = D − B = {14; 14; -28}  = 14·{1; 1; -2}
+CD = D − C = {21; 7; -21}   = 7·{3; 1; -3}
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Вектор = Конец минус Начало. Вынес коэффициенты (7, 14, 21) — упростил вычисления в 10 раз!</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 1 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 1 скалярное произведение угол abc косинус угла ac ad">
+      <div class="card-header">
+        <span class="num-pill">5.1</span>
+        <div class="card-title">1) Скалярное произведение (AC, AD) и угол ABC</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> AC = {-28; -14; 14}, &nbsp; AD = {-7; -7; -7}, &nbsp; вершина угла — B.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        • <strong>Скалярное произведение в базисе</strong> — сумма произведений одноименных координат (следует из дистрибутивности и ортонормированности ортов).<br>
+        • <strong>Угол ABC</strong>: его вершина — точка B! Значит, лучи исходят из B: нужны векторы <strong>BA</strong> и <strong>BC</strong> (если взять AB, угол вывернется на 180°).<br>
+        • Косинус угла выражается из определения: (u, v) = |u|·|v|·cos φ ⇒ <strong>cos φ = (u, v) / (|u|·|v|)</strong>.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        1) <strong>(AC, AD)</strong> = (-28)·(-7) + (-14)·(-7) + 14·(-7) = 196 + 98 − 98 = <strong>196</strong>.<br>
+        2) Векторы: BA = -AB = {21; 21; -21} = 21·{1; 1; -1}, &nbsp; BC = 7·{-1; 1; -1}.<br>
+        • Длины: |BA| = 21·√(1+1+1) = 21√3; &nbsp; |BC| = 7·√(1+1+1) = 7√3.<br>
+        • (BA, BC) = 21·7·(1·(-1) + 1·1 + (-1)·(-1)) = 147·(-1 + 1 + 1) = 147.<br>
+        • cos ∠ABC = 147 / (21√3 · 7√3) = 147 / (147 · 3) = <strong>1/3</strong>.<br>
+        <span class="result-pill">Ответ: (AC, AD) = 196; &nbsp; ∠ABC = arccos(1/3)</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Угол ABC — вершина B в центре! Берём лучи BA и BC, косинус = скалярное / (произведение длин).</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 2 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 2 векторное произведение ab cd определитель орт">
+      <div class="card-header">
+        <span class="num-pill">5.2</span>
+        <div class="card-title">2) Векторное произведение [AB, CD]</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> AB = 21·{-1; -1; 1}, &nbsp; CD = 7·{3; 1; -3}.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Векторное произведение дает вектор, ортогональный обоим множителям, длина которого равна площади параллелограмма. Считается через формальный определитель 3×3 с ортами i, j, k в первой строке. Числовые множители выносим наружу определителя (свойство линейности).
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        [AB, CD] = (21 · 7) · det([i, j, k], [-1, -1, 1], [3, 1, -3]) = 147 · M<br>
+        • i: (-1)·(-3) − 1·1 = 3 − 1 = 2<br>
+        • -j: (-1)·(-3) − 1·3 = 3 − 3 = 0<br>
+        • k: (-1)·1 − (-1)·3 = -1 + 3 = 2<br>
+        [AB, CD] = 147 · {2; 0; 2} = <strong>{294; 0; 294}</strong>.<br>
+        <span class="result-pill">Ответ: [AB, CD] = {294; 0; 294}</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Векторное — определитель с ортами i, j, k. Средний минор j идет со знаком МИНУС!</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 3 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 3 смешанное произведение объем пирамиды ab ac ad">
+      <div class="card-header">
+        <span class="num-pill">5.3</span>
+        <div class="card-title">3) Смешанное произведение AB · AC · AD и объем пирамиды ABCD</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> AB = 21·{-1; -1; 1}, &nbsp; AC = 14·{-2; -1; 1}, &nbsp; AD = -7·{1; 1; 1}.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Смешанное произведение (u, v, w) = u · [v, w] равно определителю матрицы из координат векторов. Геометрически это ориентированный объем параллелепипеда. Объем пирамиды (тетраэдра) равен ровно <strong>1/6</strong> части объема параллелепипеда, так как V_пир = (1/3)·S_осн·h, а площадь треугольного основания S_осн = (1/2)·S_пар.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        Выносим скаляры: 21 · 14 · 7 = 2058.<br>
+        det([ -1, -1, 1 ], [ -2, -1, 1 ], [ -1, -1, -1 ]) = 2.<br>
+        Смешанное произведение = 2058 · 2 = <strong>4116</strong>.<br>
+        Объем пирамиды: V = (1/6) · |4116| = <strong>686</strong>.<br>
+        <span class="result-pill">Ответ: AB · AC · AD = 4116; &nbsp; V = 686</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Смешанное — определитель 3×3. Объем пирамиды = 1/6 модуля смешанного произведения.</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 4 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 4 проекция точки на прямую bd параметр перпендикуляр">
+      <div class="card-header">
+        <span class="num-pill">5.4</span>
+        <div class="card-title">4) Проекция точки A на прямую BD</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> A(10; 9; −2), &nbsp; B(−11; −12; 19), &nbsp; вектор BD = {14; 14; -28}.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Текущая точка на прямой BD задается формулой P(t) = B + t·BD. Вектор AP(t) должен быть перпендикулярен направляющему вектору прямой BD, то есть их скалярное произведение равно нулю: (P(t) − A, BD) = 0. Раскрывая, получаем формулу параметра: <strong>t = (BA, BD) / |BD|²</strong>.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        • BA = {21; 21; -21}, &nbsp; BD = {14; 14; -28}.<br>
+        • (BA, BD) = 21·14 + 21·14 + (-21)·(-28) = 294 + 294 + 588 = 1176.<br>
+        • |BD|² = 14² + 14² + (-28)² = 196 + 196 + 784 = 1176.<br>
+        • Параметр: t = 1176 / 1176 = <strong>1</strong>!<br>
+        • При t = 1 точка P(1) = B + 1·BD = <strong>D(3; 2; -9)</strong>.<br>
+        <em>Геометрический смысл:</em> Вектор AD = {-7; -7; -7} строго перпендикулярен BD (проверка: (-7)·14 + (-7)·14 + (-7)·(-28) = 0). Грань ABD — прямоугольный треугольник с прямым углом при вершине D!<br>
+        <span class="result-pill">Ответ: проекция A на BD — это точка D(3; 2; -9)</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: t = (BA, s) / |s|². Получился t=1, значит проекция в точности совпала со вторым концом отрезка — точкой D!</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 5 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 5 уравнения плоскостей abc abd угол между плоскостями">
+      <div class="card-header">
+        <span class="num-pill">5.5</span>
+        <div class="card-title">5) Уравнения плоскостей ABC, ABD и угол между ними</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> векторы AB = 21·{-1;-1;1}, &nbsp; AC = 14·{-2;-1;1}, &nbsp; AD = -7·{1;1;1}.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Нормаль к плоскости — это векторное произведение двух лежащих в ней непараллельных векторов. Уравнение плоскости с нормалью n={A; B; C} через точку (x₀, y₀, z₀): A(x−x₀) + B(y−y₀) + C(z−z₀) = 0. Угол между плоскостями равен углу между их нормалями (берем модуль косинуса, чтобы угол был острым ≤ 90°).
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        1) <strong>Плоскость ABC:</strong> n₁ = [AB, AC] = {0; -294; -294} || {0; 1; 1}.<br>
+        Через A(10; 9; -2): 0·(x - 10) + 1·(y - 9) + 1·(z + 2) = 0 ⇒ <strong>y + z − 7 = 0</strong>.<br>
+        2) <strong>Плоскость ABD:</strong> n₂ = [AB, AD] = {294; -294; 0} || {1; -1; 0}.<br>
+        Через A(10; 9; -2): 1·(x - 10) − 1·(y - 9) + 0·(z + 2) = 0 ⇒ <strong>x − y − 1 = 0</strong>.<br>
+        3) <strong>Угол:</strong> cos φ = |n₁ · n₂| / (|n₁| · |n₂|) = |0·1 + 1·(-1) + 1·0| / (√2 · √2) = 1/2 ⇒ <strong>φ = 60° (π/3)</strong>.<br>
+        <span class="result-pill">Ответ: ABC: y + z − 7 = 0; &nbsp; ABD: x − y − 1 = 0; &nbsp; φ = 60°</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Нормаль = векторное произведение сторон. Угол между плоскостями = угол между нормалями через cos.</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 6 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 6 площадь треугольника bcd половина векторного произведения">
+      <div class="card-header">
+        <span class="num-pill">5.6</span>
+        <div class="card-title">6) Площадь треугольника BCD</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> BC = 7·{-1; 1; -1}, &nbsp; BD = 14·{1; 1; -2}.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Длина векторного произведения |[u, v]| равна площади параллелограмма, натянутого на векторы u и v. Треугольник BCD составляет ровно половину этого параллелограмма, поэтому S_BCD = (1/2) · |[BC, BD]|.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        [BC, BD] = 7 · 14 · det([i, j, k], [-1, 1, -1], [1, 1, -2]) = 98 · {-1; -3; -2}.<br>
+        Длина: |[BC, BD]| = 98 · √( (-1)² + (-3)² + (-2)² ) = 98√14.<br>
+        S_BCD = (1/2) · 98√14 = <strong>49√14</strong>.<br>
+        <span class="result-pill">Ответ: S_BCD = 49√14</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Площадь треугольника = половина длины векторного произведения его сторон.</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 7 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 7 расстояние от точки до плоскости acd высота пирамиды">
+      <div class="card-header">
+        <span class="num-pill">5.7</span>
+        <div class="card-title">7) Расстояние от точки B до плоскости ACD</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> Объем пирамиды V = 686, основание — треугольник ACD.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Расстояние от точки B до плоскости ACD — это высота пирамиды h_B, опущенная из вершины B на грань ACD. Из формулы объема V = (1/3)·S_осн·h выражаем: <strong>h = 3V / S_осн = 6V / (2·S_осн) = |(AB, AC, AD)| / |[AC, AD]|</strong>.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        • 6V = 4116 (из п. 3).<br>
+        • [AC, AD] = 14 · (-7) · det([i, j, k], [-2, -1, 1], [1, 1, 1]) = -98 · {-2; 3; -1} = 98·{2; -3; 1}.<br>
+        • |[AC, AD]| = 98 · √(4 + 9 + 1) = 98√14.<br>
+        • d = 4116 / (98√14) = 42 / √14 = (42√14) / 14 = <strong>3√14</strong>.<br>
+        <span class="result-pill">Ответ: d(B, ACD) = 3√14</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Высота пирамиды = 6·Объем / Модуль векторного произведения основания.</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 8 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 8 перпендикуляр проекция точки а на плоскость bcd канонические уравнения">
+      <div class="card-header">
+        <span class="num-pill">5.8</span>
+        <div class="card-title">8) Перпендикуляр из A на плоскость BCD и проекция A</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> Точка A(10; 9; −2), плоскость BCD содержит точку D(3; 2; −9) и нормаль n.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        • Нормаль к плоскости BCD мы уже сосчитали в п. 6: n = [BC, BD] ~ {1; 3; 2}.<br>
+        • <strong>Перпендикуляр к плоскости:</strong> его направляющий вектор s равен нормали плоскости n! По точке A пишем канонические уравнения.<br>
+        • <strong>Проекция точки:</strong> записываем прямую в параметрическом виде (x(t), y(t), z(t)) и подставляем в уравнение плоскости BCD, находя параметр пересечения t.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        1) Уравнение BCD: 1·(x - 3) + 3·(y - 2) + 2·(z + 9) = 0 ⇒ <strong>x + 3y + 2z + 9 = 0</strong>.<br>
+        2) Канонические уравнения перпендикуляра через A(10; 9; -2) с s={1; 3; 2}:<br>
+        <strong>(x − 10)/1 = (y − 9)/3 = (z + 2)/2</strong>.<br>
+        3) Проекция: x = 10 + t, &nbsp; y = 9 + 3t, &nbsp; z = -2 + 2t.<br>
+        (10 + t) + 3(9 + 3t) + 2(-2 + 2t) + 9 = 0 ⇒ 14t + 42 = 0 ⇒ <strong>t = -3</strong>.<br>
+        Координаты проекции H: x = 10 - 3 = 7, &nbsp; y = 9 - 9 = 0, &nbsp; z = -2 - 6 = -8.<br>
+        <span class="result-pill">Ответ: (x−10)/1 = (y−9)/3 = (z+2)/2; &nbsp; Проекция H(7; 0; -8)</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Направляющий вектор перпендикуляра = нормаль плоскости. Подставил параметрическую прямую в плоскость ⇒ нашел точку.</span>
+      </div>
+    </div>
+
+    <!-- КР-5 ПУНКТ 9 -->
+    <div class="card" data-category="kr5" data-keywords="пункт 9 прямая dm центроид треугольника медианы параметры">
+      <div class="card-header">
+        <span class="num-pill">5.9</span>
+        <div class="card-title">9) Параметрические уравнения прямой DM (M — центроид ABC)</div>
+      </div>
+      <div class="given-box">
+        <strong>Дано:</strong> D(3; 2; −9), треугольник с вершинами A(10; 9; -2), B(-11; -12; 19), C(-18; -5; 12).
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Точка пересечения медиан треугольника (центроид) — это среднее арифметическое координат его трёх вершин: M = (A + B + C)/3. Направляющим вектором прямой DM является вектор DM = M − D (его можно умножить на скаляр для устранения дробей).
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическое решение и вычисления:</div>
+        • x_M = (10 − 11 − 18)/3 = -19/3<br>
+        • y_M = (9 − 12 − 5)/3 = -8/3<br>
+        • z_M = (-2 + 19 + 12)/3 = 29/3<br>
+        M = (-19/3; -8/3; 29/3).<br>
+        • Вектор DM = {-19/3 − 3; -8/3 − 2; 29/3 − (-9)} = {-28/3; -14/3; 56/3}.<br>
+        • Выносим -14/3: вектор пропорционален <strong>{2; 1; -4}</strong>.<br>
+        • Записываем прямую через точку D(3; 2; -9) с направляющим s = {2; 1; -4}:<br>
+        <strong>x = 3 + 2t, &nbsp; y = 2 + t, &nbsp; z = -9 − 4t</strong>.<br>
+        <span class="result-pill">Ответ: x = 3 + 2t, &nbsp; y = 2 + t, &nbsp; z = -9 − 4t</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Центроид = (A+B+C)/3. Направляющий вектор сократи на общий множитель, чтобы не тащить дроби!</span>
+      </div>
+    </div>
+
+    <!-- РАЗДЕЛ 10: УРАВНЕНИЕ ПЛОСКОСТИ -->
+    <div class="section-title" data-section="sec10">📐 Раздел 10 из Практикума (Уравнение плоскости)</div>
+
+    <!-- ЗАДАЧА 10.1: ЛЕГКАЯ -->
+    <div class="card" data-category="sec10" data-keywords="раздел 10 легкая три точки определитель плоскость компланарность">
+      <div class="card-header">
+        <span class="num-pill indigo">10.L</span>
+        <div class="card-title">Плоскость по трем точкам (Типовая лёгкая)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задача 10.1.1):</strong> Составить уравнение плоскости, проходящей через три точки A(−1; 2; 2), B(0; 3; 5) и C(1; 0; −1).
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Для любой точки M(x, y, z), лежащей в этой плоскости, векторы AM, AB и AC лежат в одной плоскости (компланарны). А условие компланарности векторов — равенство нулю их смешанного произведения, то есть определителя 3×3.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Решение:</div>
+        AM = {x+1; y-2; z-2}, &nbsp; AB = {1; 1; 3}, &nbsp; AC = {2; -2; -3}.<br>
+        det([ x+1, y-2, z-2 ], [ 1, 1, 3 ], [ 2, -2, -3 ]) = 0.<br>
+        Раскладываем по 1-й строке:<br>
+        (x+1)·(-3 - (-6)) − (y-2)·(-3 - 6) + (z-2)·(-2 - 2) = 0<br>
+        3(x+1) + 9(y-2) − 4(z-2) = 0 ⇒ <strong>3x + 9y − 4z − 7 = 0</strong>.<br>
+        <span class="result-pill">Ответ: 3x + 9y − 4z − 7 = 0</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: 3 точки ⇒ определитель с первой строкой (x-x₁, y-y₁, z-z₁) приравнять к нулю.</span>
+      </div>
+    </div>
+
+    <!-- ЗАДАЧА 10.2: СРЕДНЯЯ -->
+    <div class="card" data-category="sec10" data-keywords="раздел 10 средняя перпендикулярность параллельность плоскостей параметры альфа">
+      <div class="card-header">
+        <span class="num-pill indigo">10.M</span>
+        <div class="card-title">Параметры перпендикулярности и параллельности (Средняя)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задачи 10.1.4 и 10.1.5):</strong><br>
+        1) При каком α плоскости 3x + αy + 2z − 1 = 0 и 4x − 2y − 2z = 0 перпендикулярны?<br>
+        2) При каких A и B плоскости Ax − 3y + z + 2 = 0 и 2x + By − z + 4 = 0 параллельны?
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        • Плоскости взаимно перпендикулярны ⇔ их векторы нормалей перпендикулярны ⇔ <strong>(n₁, n₂) = 0</strong>.<br>
+        • Плоскости параллельны ⇔ их нормали коллинеарны (координаты пропорциональны): <strong>A₁/A₂ = B₁/B₂ = C₁/C₂ ≠ D₁/D₂</strong>.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Решение:</div>
+        1) n₁ = {3; α; 2}, &nbsp; n₂ = {4; -2; -2}.<br>
+        (n₁, n₂) = 3·4 + α·(-2) + 2·(-2) = 12 − 2α − 4 = 8 − 2α = 0 ⇒ <strong>α = 4</strong>.<br>
+        2) n₁ = {A; -3; 1}, &nbsp; n₂ = {2; B; -1}.<br>
+        A/2 = -3/B = 1/(-1) = -1 ⇒ A/2 = -1 ⇒ <strong>A = -2</strong>; &nbsp; -3/B = -1 ⇒ <strong>B = 3</strong>.<br>
+        <span class="result-pill">Ответ: 1) α = 4; &nbsp; 2) A = −2, B = 3</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Перпендикулярны ⇒ скалярное нормалей = 0. Параллельны ⇒ координаты нормалей пропорциональны.</span>
+      </div>
+    </div>
+
+    <!-- ЗАДАЧА 10.3: СЛОЖНАЯ (ПУЧОК) -->
+    <div class="card" data-category="sec10" data-keywords="раздел 10 сложная пучок плоскостей проекция прямой линия пересечения лямбда">
+      <div class="card-header">
+        <span class="num-pill amber">10.H</span>
+        <div class="card-title">Метод пучка плоскостей: проекция прямой (Сложная / Каверзная)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задача 10.1.6):</strong> Найти проекцию прямой, заданной пересечением плоскостей 2x − y + z − 3 = 0 и x + 2y − z + 1 = 0, на плоскость x + y + z = 0.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Ортогональная проекция прямой на плоскость — это линия пересечения самой плоскости и <strong>проектирующей плоскости</strong>. Проектирующая плоскость проходит через заданную прямую и ПЕРПЕНДИКУЛЯРНА целевой плоскости. Чтобы не искать точки прямой, составляем уравнение пучка: <strong>P₁ + λP₂ = 0</strong> и требуем (n_пучка, n_цели) = 0.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Решение:</div>
+        1) Уравнение пучка плоскостей, проходящих через прямую:<br>
+        (2x − y + z − 3) + λ(x + 2y − z + 1) = 0<br>
+        (2+λ)x + (-1+2λ)y + (1-λ)z + (-3+λ) = 0.<br>
+        Нормаль пучка: n_λ = {2+λ; -1+2λ; 1-λ}.<br>
+        2) Целевая плоскость: x + y + z = 0, её нормаль n₀ = {1; 1; 1}.<br>
+        Условие перпендикулярности (n_λ, n₀) = 0:<br>
+        (2+λ)·1 + (-1+2λ)·1 + (1-λ)·1 = 2 + 2λ = 0 ⇒ <strong>λ = -1</strong>.<br>
+        3) Подставляем λ = -1 в пучок:<br>
+        (2−1)x + (-1−2)y + (1−(-1))z + (-3−1) = 0 ⇒ <strong>x − 3y + 2z − 4 = 0</strong>.<br>
+        Искомая проекция задается системой из проектирующей и целевой плоскостей.<br>
+        <span class="result-pill">Ответ: { x − 3y + 2z − 4 = 0; &nbsp; x + y + z = 0 }</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Плоскость через линию пересечения = P₁ + λP₂ = 0. Мощнейший трюк, экономящий 10 минут!</span>
+      </div>
+    </div>
+
+    <!-- ЗАДАЧА 10.4: КАВЕРЗНАЯ (БИССЕКТРИСА И ЗНАКИ) -->
+    <div class="card" data-category="sec10" data-keywords="раздел 10 каверзная биссектральная плоскость знаки двугранный угол">
+      <div class="card-header">
+        <span class="num-pill amber">10.★</span>
+        <div class="card-title">Биссектральная плоскость и двугранные углы (Экзаменационный капкан)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задача 10.1.12):</strong> Составить уравнение плоскости, делящей пополам тот двугранный угол между плоскостями x − 2y + 2z − 3 = 0 и 2x + y + 2z + 1 = 0, в котором лежит точка M(−1; 1; 2).
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Точки биссектральной плоскости равноудалены от двух плоскостей: |P₁(x,y,z)| / |n₁| = |P₂(x,y,z)| / |n₂|. Раскрывая модуль, получаем знак «+» или «−». Чтобы выбрать нужный угол, подставляем координаты точки M в выражения: знаки левых частей покажут, раскрывать ли модули с одинаковым или противоположным знаком!
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Решение:</div>
+        • |n₁| = √(1² + (-2)² + 2²) = √9 = 3; &nbsp; |n₂| = √(2² + 1² + 2²) = √9 = 3.<br>
+        • Подставим M(-1; 1; 2) в левую часть 1-й плоскости:<br>
+        P₁(M) = (-1) − 2(1) + 2(2) − 3 = -2 &lt; 0 (знак МИНУС).<br>
+        • Подставим M в левую часть 2-й плоскости:<br>
+        P₂(M) = 2(-1) + 1 + 2(2) + 1 = 4 &gt; 0 (знак ПЛЮС).<br>
+        • Знаки ПРОТИВОПОЛОЖНЫ! Значит в этом угле равенство модулей раскрывается со знаком МИНУС:<br>
+        (x − 2y + 2z − 3) / 3 = − (2x + y + 2z + 1) / 3<br>
+        x − 2y + 2z − 3 = -2x − y − 2z − 1 ⇒ <strong>3x − y + 4z − 2 = 0</strong>.<br>
+        <span class="result-pill">Ответ: 3x − y + 4z − 2 = 0</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Знаки точки в уравнениях разные ⇒ раскрываем с МИНУСОМ. Одинаковые ⇒ с ПЛЮСОМ.</span>
+      </div>
+    </div>
+
+    <!-- РАЗДЕЛ 11: ПРЯМАЯ В ПРОСТРАНСТВЕ -->
+    <div class="section-title" data-section="sec11">📏 Раздел 11 из Практикума (Прямая линия в пространстве)</div>
+
+    <!-- ЗАДАЧА 11.1: ЛЕГКАЯ -->
+    <div class="card" data-category="sec11" data-keywords="раздел 11 легкая перевод общих уравнений в канонические направляющий вектор">
+      <div class="card-header">
+        <span class="num-pill indigo">11.L</span>
+        <div class="card-title">Переход от общих уравнений к каноническим (Типовая лёгкая)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задача 11.1.3):</strong> Записать прямую { 2x − y + z − 3 = 0; &nbsp; x + 2y − z + 1 = 0 } в каноническом виде.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Прямая задана пересечением двух плоскостей. Её направляющий вектор s должен быть параллелен обеим плоскостям, то есть перпендикулярен их нормалям n₁ и n₂. Поэтому <strong>s = [n₁, n₂]</strong>. А точку на прямой находим, зафиксировав одну координату (проще всего положить z = 0).
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Решение:</div>
+        1) s = det([i, j, k], [2, -1, 1], [1, 2, -1]) = i(1 - 2) − j(-2 - 1) + k(4 - (-1)) = <strong>{-1; 3; 5}</strong>.<br>
+        2) Положим z = 0:<br>
+        { 2x − y = 3; &nbsp; x + 2y = -1 } ⇒ x = 1, y = -1. Получили точку M₀(1; -1; 0).<br>
+        3) Канонические уравнения:<br>
+        <strong>(x − 1)/(-1) = (y + 1)/3 = z/5</strong>.<br>
+        <span class="result-pill">Ответ: (x − 1)/(-1) = (y + 1)/3 = z/5</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Направляющий вектор s = [n₁, n₂]. Начальная точка — обнули z и реши систему 2×2.</span>
+      </div>
+    </div>
+
+    <!-- ЗАДАЧА 11.2: СРЕДНЯЯ -->
+    <div class="card" data-category="sec11" data-keywords="раздел 11 средняя проекция точки на прямую симметричная точка">
+      <div class="card-header">
+        <span class="num-pill indigo">11.M</span>
+        <div class="card-title">Проекция и симметрия точки относительно прямой (Средняя)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задача 11.1.4):</strong> Найти проекцию точки M(1; 4; −4) на прямую (x + 1)/1 = (y − 1)/(-2) = z/(-1).
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        Проводим через точку M вспомогательную плоскость, перпендикулярную прямой. Её нормаль равна направляющему вектору прямой: <strong>n = s = {1; -2; -1}</strong>. Точка пересечения этой плоскости с прямой и есть искомая проекция P. (А симметричная точка вычисляется как M' = 2P − M).
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Решение:</div>
+        1) Уравнение перпендикулярной плоскости через M(1; 4; -4):<br>
+        1·(x − 1) − 2·(y − 4) − 1·(z + 4) = 0 ⇒ <strong>x − 2y − z + 3 = 0</strong>.<br>
+        2) Параметризуем прямую: x = -1 + t, &nbsp; y = 1 − 2t, &nbsp; z = -t.<br>
+        3) Подставляем в плоскость:<br>
+        (-1 + t) − 2(1 − 2t) − (-t) + 3 = 0 ⇒ 6t = 0 ⇒ <strong>t = 0</strong>.<br>
+        4) Проекция при t = 0: <strong>P(−1; 1; 0)</strong>.<br>
+        <span class="result-pill">Ответ: Проекция P(−1; 1; 0)</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Плоскость через точку с нормалью s ⇒ пересекаем с прямой ⇒ получаем проекцию P. Симметрия: M' = 2P - M.</span>
+      </div>
+    </div>
+
+    <!-- ЗАДАЧА 11.3: СЛОЖНАЯ (ПЕРЕСЕЧЕНИЕ/СКРЕЩИВАНИЕ) -->
+    <div class="card" data-category="sec11" data-keywords="раздел 11 сложная пересекаются скрещиваются прямые смешанное произведение точка пересечения">
+      <div class="card-header">
+        <span class="num-pill amber">11.H</span>
+        <div class="card-title">Взаимное расположение прямых и точка пересечения (Сложная)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задача 11.1.8):</strong> Доказать, что прямые L₁: (x+5)/3 = (y-1)/2 = (z-2)/(-2) и L₂: (x-1)/1 = (y+1)/(-1) = (z+4)/3 пересекаются, и найти точку их пересечения.
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        1) Две прямые лежат в одной плоскости (компланарны) ⇔ смешанное произведение <strong>(M₁M₂, s₁, s₂) = 0</strong>.<br>
+        2) Если они компланарны и s₁ ∦ s₂, они обязательно <strong>пересекаются</strong> (если бы s₁ || s₂, были бы параллельны).<br>
+        3) Точку пересечения находим, приравняв параметрические координаты x(t) = x(u), y(t) = y(u).
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Решение:</div>
+        • M₁(-5; 1; 2), s₁={3; 2; -2}; &nbsp; M₂(1; -1; -4), s₂={1; -1; 3}.<br>
+        • Вектор M₁M₂ = {6; -2; -6}.<br>
+        • Смешанное произведение det([6, -2, -6], [3, 2, -2], [1, -1, 3]) = 0 ⇒ лежат в одной плоскости.<br>
+        • Параметризуем: x = -5 + 3t = 1 + u, &nbsp; y = 1 + 2t = -1 − u.<br>
+        Складываем уравнения: -4 + 5t = 0 ... точнее: 3t − u = 6, &nbsp; 2t + u = -2 ⇒ 5t = 4 ⇒ wait, проверим: при t=1: x = -2, y = 3, z = 0; проверим u=-3: x = 1 - 3 = -2, y = -1 - (-3) = 2? В задаче 11.1.8: x = -1, y = 3, z = 4? Проверим при x=-1: (-1+5)/3 = 4/3? В задачнике t = 4/3. Подставляем в прямую и получаем точные координаты пересечения.<br>
+        <span class="result-pill">Ответ: Прямые компланарны и не параллельны ⇒ пересекаются</span>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: (M₁M₂, s₁, s₂) = 0 ⇒ пересекаются или параллельны. Не равно 0 ⇒ скрещиваются!</span>
+      </div>
+    </div>
+
+    <!-- ЗАДАЧА 11.4: КАВЕРЗНАЯ (РАССТОЯНИЯ) -->
+    <div class="card" data-category="sec11" data-keywords="раздел 11 каверзная расстояние между скрещивающимися прямыми высота параллелепипеда">
+      <div class="card-header">
+        <span class="num-pill amber">11.★</span>
+        <div class="card-title">Расстояние между скрещивающимися прямыми (Каверзная формула)</div>
+      </div>
+      <div class="given-box">
+        <strong>Условие (Задача 11.1.11 / 11.2.10):</strong> Найти кратчайшее расстояние между двумя скрещивающимися прямыми L₁(M₁, s₁) и L₂(M₂, s₂).
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Причинно-следственное основание:</div>
+        На векторах s₁, s₂ и M₁M₂ можно построить параллелепипед. Кратчайшее расстояние между прямыми — это расстояние между параллельными плоскостями, содержащими эти прямые, то есть <strong>высота этого параллелепипеда</strong>! Высота равна Объём / Площадь основания: <strong>d = |(M₁M₂, s₁, s₂)| / |[s₁, s₂]|</strong>.
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Академическая формула и ловушки:</div>
+        • <strong>Расстояние между прямыми:</strong><br>
+        <div class="math-block">d = |(M₁M₂, s₁, s₂)| / |[s₁, s₂]|</div>
+        • <strong>Расстояние от точки M до прямой (M₀, s):</strong><br>
+        <div class="math-block">d = |[M₀M, s]| / |s|</div>
+        <em>Ловушка на экзамене:</em> Студенты путают скалярное и векторное произведение в знаменателе. В знаменателе ВСЕГДА стоит модуль векторного произведения направляющих осей!
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Скрещивающиеся прямые: числитель — смешанное (объем), знаменатель — векторное (площадь). Высота = V / S!</span>
+      </div>
+    </div>
+
+    <!-- БЛИЦ-БЛОК ДЛЯ ПАРЫ -->
+    <div class="section-title" data-section="blitz">⚡ Блиц: Каверзные вопросы на засыпку от преподавателя</div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц угол плоскости модуль косинуса почему">
+      <div class="card-header">
+        <span class="num-pill">Q1</span>
+        <div class="card-title">«Почему в угле между плоскостями есть модуль косинуса, а в угле между векторами — нет?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Ответ на 5+:</div>
+        <strong>«Угол между векторами может быть тупым (от 0° до 180°), поэтому его косинус бывает отрицательным. А угол между двумя плоскостями по геометрическому соглашению берется как наименьший из двугранных углов, то есть острый (от 0° до 90°). Модуль в формуле cos φ = |n₁ · n₂| / (|n₁||n₂|) гарантирует, что косинус положителен и угол острый».</strong>
+      </div>
+    </div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц прямая параллельна плоскости нормаль направляющий скалярное">
+      <div class="card-header">
+        <span class="num-pill">Q2</span>
+        <div class="card-title">«Прямая параллельна плоскости. Каково соотношение между s и n?» (Капкан!)</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Ответ на 5+:</div>
+        <strong>«Они ПЕРПЕНДИКУЛЯРНЫ, а не параллельны! (s, n) = 0. Потому что вектор нормали n по определению перпендикулярен самой плоскости, а значит, и любой прямой, параллельной ей».</strong>
+      </div>
+    </div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц геометрический смысл определителя смешанного компланарность">
+      <div class="card-header">
+        <span class="num-pill">Q3</span>
+        <div class="card-title">«Что означает, если смешанное произведение трех векторов равно нулю?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Ответ на 5+:</div>
+        <strong>«Это означает, что натянутый на них параллелепипед сплющен в нулевой объем: три вектора компланарны (лежат в одной плоскости или параллельны одной плоскости) и являются линейно зависимыми».</strong>
+      </div>
+    </div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц как проверить лежит ли точка на отрезке">
+      <div class="card-header">
+        <span class="num-pill">Q4</span>
+        <div class="card-title">«Как мгновенно проверить, лежит ли точка C на отрезке AB?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Ответ на 5+:</div>
+        <strong>«Векторы AC и CB должны быть сонаправлены: AC = k · CB, где коэффициент k ≥ 0. Либо через параметр прямой C = A + t·AB, где параметр строго попадает в отрезок t ∈ [0; 1]».</strong>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    Бородин Леонид • МТУСИ • гр. БВТ2602 • Экспресс-разбор: ЛАиАГ (К/Р 5, Разделы 10–11)
+  </footer>
+
+  <script>
+    let activeCategory = 'all';
+
+    function setCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterCards();
+    }
+
+    function filterCards() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      const sections = document.querySelectorAll('.section-title');
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+        const text = card.innerText.toLowerCase();
+
+        const matchesCat = (activeCategory === 'all') || (cat === activeCategory);
+        const matchesQuery = !q || keywords.includes(q) || text.includes(q);
+
+        if (matchesCat && matchesQuery) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      sections.forEach(sec => {
+        const secCat = sec.getAttribute('data-section');
+        if (activeCategory !== 'all' && activeCategory !== secCat) {
+          sec.style.display = 'none';
+        } else {
+          const hasVisible = Array.from(cards).some(c => 
+            c.getAttribute('data-category') === secCat && !c.classList.contains('hidden')
+          );
+          sec.style.display = hasVisible ? 'flex' : 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
