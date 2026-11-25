@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Шпаргалка в метро • Реферат Шрейбера</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --subtext: #94a3b8;
+      --accent: #f59e0b;
+      --indigo: #818cf8;
+      --indigo-bg: rgba(99, 102, 241, 0.15);
+      --border: #334155;
+      --quote-border: #f59e0b;
+      --quote-bg: rgba(245, 158, 11, 0.08);
+      --green: #4ade80;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --subtext: #64748b;
+        --accent: #d97706;
+        --indigo: #4f46e5;
+        --indigo-bg: #eef2ff;
+        --border: #e2e8f0;
+        --quote-border: #d97706;
+        --quote-bg: #fffbeb;
+        --green: #16a34a;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 12px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      padding-top: 4px;
+      padding-bottom: 10px;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .badge {
+      font-size: 0.75rem;
+      background: var(--indigo-bg);
+      color: var(--indigo);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid var(--indigo);
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      font-weight: 800;
+      margin: 16px 0 8px 4px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .num-pill {
+      background: var(--indigo);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .card-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .quote-block {
+      background: var(--quote-bg);
+      border-left: 3px solid var(--quote-border);
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .quote-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .simple-block {
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+    }
+    .simple-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--indigo);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .beacon {
+      background: var(--indigo-bg);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--indigo);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-row">
+      <h1>🚇 Гайд в метро: Шрейбер</h1>
+      <span class="badge">БВТ2602 • ОРГ</span>
+    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Найти термин (онтология, табу, знак...)" oninput="filterCards()">
+  </header>
+
+  <main id="cardsContainer">
+
+    <div class="section-title">Введение и методология</div>
+
+    <div class="card" data-keywords="введение парадокс xxi века наука технологии ии заговор конспирология шрейбер">
+      <div class="card-header">
+        <span class="num-pill">0.0</span>
+        <div class="card-title">Введение. Парадокс XXI века: почему наука не убила миф?</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«В XXI веке триумф высоких технологий сосуществует с расцветом мифа... Шрейбер доказал, что миф — не сказка, а фундаментальная архитектура принятия решений».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Вокруг ИИ и космос, но интернет завален теориями заговора и фейками. Шрейбер доказал: миф — это не признак тупости дикаря. Это древний встроенный автопилот нашего мозга. При стрессе и кризисе сложная логика отключается, и мозг включает миф, чтобы не паниковать.
+      </div>
+      <div class="beacon">💡 Маячок: Миф — это не глупость, а психологический предохранитель от тревоги.</div>
+    </div>
+
+    <div class="card" data-keywords="глава 1 1.1 ситуация выбора возможности ценности программы буриданов осел">
+      <div class="card-header">
+        <span class="num-pill">1.1</span>
+        <div class="card-title">Сущность мировоззрения и структура ситуации выбора</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Мировоззрение — не пассивное созерцание, а прикладная схема принятия решений. Ситуация выбора: поле возможностей, шкала ценностей, программа действий».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Мировоззрение нужно не чтобы лежать на диване и думать о космосе, а чтобы решать, что делать прямо сейчас. Любой выбор состоит из 3 шагов:
+        <br>1) <b>Поле возможностей:</b> что реально разрешает физика и ресурсы (например, в кармане 500 рублей).
+        <br>2) <b>Шкала ценностей:</b> фильтр — что для меня хорошо, а что дно (поесть или сберечь?).
+        <br>3) <b>Программа действий:</b> конкретный алгоритм реализации.
+        <br><i>Если сломать хоть одно — человек зависнет, как «буриданов осёл»!</i>
+      </div>
+      <div class="beacon">💡 Маячок: Мировоззрение = навигатор действий в условиях нехватки данных.</div>
+    </div>
+
+    <div class="card" data-keywords="глава 1 1.2 триада блоков онтология аксиология праксиология монолит синкретизм">
+      <div class="card-header">
+        <span class="num-pill">1.2</span>
+        <div class="card-title">Триада блоков: онтология, аксиология, праксиология</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Три неразрывных блока: онтологический (картина мира), аксиологический (ценности) и праксиологический (программы поведения). В мифе они спаяны в синкретичный монолит».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Три детских вопроса:
+        <br>• <b>Онтология:</b> Что вокруг есть? (Картина мира).
+        <br>• <b>Аксиология:</b> Что из этого ценно и добро? (Ценности).
+        <br>• <b>Праксиология:</b> Как конкретно действовать? (Правила и ритуалы).
+        <br><b>Суть мифа:</b> в науке факт отделен от морали (физика расщепляет атом, но молчит о добре). А в мифе они намертво склеены в один монолит: <i>«Мир живой ➔ Богов надо уважать ➔ Неси жертву»</i>. Сомневаться нельзя!
+      </div>
+      <div class="beacon">💡 Маячок: В мифе картина мира, мораль и ритуал — спаянный монолит.</div>
+    </div>
+
+    <div class="section-title">Онтология и семиотика мифа</div>
+
+    <div class="card" data-keywords="глава 2 2.1 аналогия антропоморфизм макрокосм микрокосм семья род природа стихии">
+      <div class="card-header">
+        <span class="num-pill">2.1</span>
+        <div class="card-title">Метод аналогии и всеобщий антропоморфизм</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Древний человек переносил семейно-родовые отношения на весь мир. В мифе нет слепых природных сил: стихии одушевлены и наделены человеческими страстями».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Первобытный человек не знал формул термодинамики, но отлично знал свою семью: гнев бати, любовь матери, обиды и долг. И он перенёс это на природу: Небо — строгий отец, Земля — мать. Засуха или буря — это не холодный фронт, а обида духов за грехи!
+        <br><b>Зачем?</b> С бездушным ветром не договоришься. А одушевленного духа можно задобрить молитвой, жертвой и покаянием.
+      </div>
+      <div class="beacon">💡 Маячок: Очеловечивание природы нужно, чтобы с ней можно было договориться.</div>
+    </div>
+
+    <div class="card" data-keywords="глава 2 2.2 знак вещь магия имени вуду изображение сущность">
+      <div class="card-header">
+        <span class="num-pill">2.2</span>
+        <div class="card-title">Нерасчленённость знака и вещи (Магия имени)</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«В архаическом сознании имя субстанционально тождественно самой вещи. Отсюда магия имени и вера во вред через повреждение образа врага».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Для нас слово «пламя» пальцы не жжёт. Знак — это условность. А в мифе <b>слово и вещь — это одно физическое целое</b>:
+        <br>• Сказать имя беса — призвать его в дом (отсюда «не поминай к ночи»).
+        <br>• Знать тайное имя врага — получить над ним пульт управления.
+        <br>• Проткнуть рисунок зверя или чучело врага — нанести реальную рану оригиналу.
+        <br><i>Поэтому миф нельзя разбить спором изнутри: чтобы усомниться, нужно уметь отделить знак от вещи!</i>
+      </div>
+      <div class="beacon">💡 Маячок: В мифе Имя ≡ Вещь. Ритуал над знаком бьёт по реальному объекту.</div>
+    </div>
+
+    <div class="card" data-keywords="глава 2 2.3 сакральный прецедент in illo tempore золотой век время цикл демиург">
+      <div class="card-header">
+        <span class="num-pill">2.3</span>
+        <div class="card-title">Сакральный прецедент (in illo tempore)</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Время циклично. Высшая точка легитимности — время первотворения (in illo tempore). Поступок правилен лишь тогда, когда повторяет первопредка».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        У нас время — стрела в будущее. В мифе время — круговорот сезонов. Самое святое время — первобытный «золотой век» богов (<i>in illo tempore</i> — «во время о́но»).
+        <br>«Почему мы строим лодку именно так?» — <i>«Потому что боги в начале времён построили её так. Повторишь — доплывёшь. Придумаешь отсебятину — утонешь и погубишь род!»</i>. Это полностью освобождает от мук выбора: готовый ответ уже дан предками.
+      </div>
+      <div class="beacon">💡 Маячок: Легитимно только то, что в точности копирует сакральный образец.</div>
+    </div>
+
+    <div class="section-title">Ценности и регуляция поведения</div>
+
+    <div class="card" data-keywords="глава 3 3.1 нормативный статус ценностей моральный релятивизм этика">
+      <div class="card-header">
+        <span class="num-pill">3.1</span>
+        <div class="card-title">Нормативный статус ценностей: победа над релятивизмом</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Мифологическая этика не знает релятивизма и сомнений: ценности рода обладают статусом непререкаемого космического закона».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Современный человек постоянно терзается сомнениями: «А прав ли я? А что есть добро?». Это релятивизм.
+        В мифе сомнений ноль: мораль племени так же объективна, как закон всемирного тяготения или восход солнца. Выбор только один: либо ты чтишь обычай рода, либо ты космический преступник, из-за которого погибнут все.
+      </div>
+      <div class="beacon">💡 Маячок: В мифе ценности — не тема для споров, а закон выживания.</div>
+    </div>
+
+    <div class="card" data-keywords="глава 3 3.2 ритуал табу энтропия социальная гигиена хаос">
+      <div class="card-header">
+        <span class="num-pill">3.2</span>
+        <div class="card-title">Ритуал и табу: две программы действия</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Ритуал преодолевает энтропию мира через повторение деяний творца, а табу блокирует разрушительные сценарии поведения».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Две кнопки управления:
+        <br>🟢 <b>Ритуал (Зелёный свет — ЧТО ДЕЛАТЬ):</b> Мир стареет и сползает в хаос (энтропия). Ритуал — это кнопка «перезагрузки космоса». Провели обряд — солнце снова встало, весна пришла.
+        <br>🔴 <b>Табу (Красный свет — НЕЛЬЗЯ НИКОГДА):</b> Категорический запрет без объяснений (на инцест, братоубийство, осквернение могил). Первая в истории «техника безопасности», спасшая людей от вымирания до законов и судов.
+      </div>
+      <div class="beacon">💡 Маячок: Ритуал побеждает хаос, а табу защищает род от самораспада.</div>
+    </div>
+
+    <div class="section-title">Современность и государственность</div>
+
+    <div class="card" data-keywords="глава 4 4.1 дефицит смыслов наука почему не победила вакуум ремифологизация">
+      <div class="card-header">
+        <span class="num-pill">4.1</span>
+        <div class="card-title">Почему наука не заменила миф: разрыв смыслов</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Наука отвечает на вопрос „КАК?“, но молчит о „ЗАЧЕМ?“. Крушение светских идеологий обнажает вакуум, который заполняется неомифом».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Уравнения физики объясняют, как собрать процессор или расщепить ядро. Но наука принципиально молчит о том, <i>зачем жить, в чём смысл страданий и что такое честь и любовь</i>.
+        Когда рушатся привычные ориентиры (распад СССР, кризисы, пандемии), человек остаётся в ледяной смысловой пустоте. И мозг на автомате бежит в миф, дающий простые эмоциональные ответы.
+      </div>
+      <div class="beacon">💡 Маячок: Наука даёт технологии, но не даёт смысл жизни.</div>
+    </div>
+
+    <div class="card" data-keywords="глава 4 4.2 медиа соцсети неомифология теории заговора культура отмены фейки">
+      <div class="card-header">
+        <span class="num-pill">4.2</span>
+        <div class="card-title">Неомифология XXI века: медиа, соцсети и фейки</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Медиа воспроизводят архаику: поиск тайных виновников (новый антропоморфизм), культ героев-спасителей и алгоритмические ритуалы отлучения».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Интернет — это цифровой первобытный костёр:
+        <br>• <b>Теории заговора</b> = поиск злого шамана. Сложный кризис проще свалить на «мировую закулису».
+        <br>• <b>Политические демиурги</b> = лидер воспринимается как былинный богатырь, бьющий хтонических чудовищ.
+        <br>• <b>Культура отмены и травля</b> = первобытное изгнание соплеменника за нарушение священного табу.
+      </div>
+      <div class="beacon">💡 Маячок: Технологии новые, но алгоритмы страха и сплочения — первобытные.</div>
+    </div>
+
+    <div class="card" data-keywords="глава 4 4.3 когнитивный суверенитет ценностный каркас россия государственность победа">
+      <div class="card-header">
+        <span class="num-pill">4.3</span>
+        <div class="card-title">Ценностный каркас и когнитивный суверенитет России</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В реферате (жирным):</div>
+        <strong>«Государство опирается не только на принуждение, но и на смысловое ядро. Защита культурного кода и памяти — основа когнитивного суверенитета».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Государство не может держаться только на штрафах и полиции. Нужен общий смысловой фундамент: общая гордость за Великую Победу (наш священный первопрецедент подвига), ценность семьи и взаимовыручки.
+        <br>Если этот фундамент разрушить — общество распадается на испуганных одиночек, и чужие манипуляторы легко загрузят в головы деструктивные сказки.
+      </div>
+      <div class="beacon">💡 Маячок: Без своего ценностного каркаса народ подчиняется чужим мифам.</div>
+    </div>
+
+    <div class="card" data-keywords="заключение выводы триада суверенитет">
+      <div class="card-header">
+        <span class="num-pill">5.0</span>
+        <div class="card-title">Заключение: 3 главных вывода для доклада</div>
+      </div>
+      <div class="simple-block">
+        <b>1. Миф — это не отсталость:</b> это базовый психологический режим защиты мозга от стресса и неопределённости.
+        <br><br><b>2. Триада Шрейбера (Мир ➔ Ценности ➔ Действие)</b> — инструмент распознавания манипуляций. Всегда смотрите: какую картину мира вам внушают и к какому действию толкают?
+        <br><br><b>3. Когнитивный суверенитет студента:</b> понимать природу архаизации, мыслить критически и держаться созидательных ценностей своего народа.
+      </div>
+      <div class="beacon">🏁 Итог: Миф бессмертен, но знание его законов делает нас свободными.</div>
+    </div>
+
+  </main>
+
+  <script>
+    function filterCards() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        const kw = card.getAttribute('data-keywords') || '';
+        if (!q || text.includes(q) || kw.includes(q)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
