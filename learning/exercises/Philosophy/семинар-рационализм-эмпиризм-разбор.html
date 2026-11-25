@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Семинар: Рационализм и эмпиризм XVII века — Философия МТУСИ</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --subtext: #94a3b8;
+      --accent: #38bdf8;
+      --indigo: #818cf8;
+      --indigo-bg: rgba(99, 102, 241, 0.15);
+      --border: #334155;
+      --quote-border: #38bdf8;
+      --quote-bg: rgba(56, 189, 248, 0.08);
+      --green: #4ade80;
+      --pill-bg: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --subtext: #64748b;
+        --accent: #0284c7;
+        --indigo: #4f46e5;
+        --indigo-bg: #eef2ff;
+        --border: #e2e8f0;
+        --quote-border: #0284c7;
+        --quote-bg: #f0f9ff;
+        --green: #16a34a;
+        --pill-bg: #e2e8f0;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 12px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      padding-top: 4px;
+      padding-bottom: 10px;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge {
+      font-size: 0.75rem;
+      background: var(--indigo-bg);
+      color: var(--indigo);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid var(--indigo);
+      white-space: nowrap;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 8px;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+    .filters {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .filters::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      background: var(--pill-bg);
+      color: var(--subtext);
+      border: none;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .section-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      font-weight: 800;
+      margin: 18px 0 8px 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .card.hidden {
+      display: none !important;
+    }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+    .num-pill {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .card-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .quote-block {
+      background: var(--quote-bg);
+      border-left: 3px solid var(--quote-border);
+      padding: 8px 10px;
+      margin-bottom: 9px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .quote-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .simple-block {
+      margin-bottom: 9px;
+      font-size: 0.90rem;
+      color: var(--text);
+    }
+    .simple-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--indigo);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .beacon {
+      background: var(--indigo-bg);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--indigo);
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .beacon-icon { flex-shrink: 0; }
+    .quick-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+    .stat-box {
+      background: rgba(0,0,0,0.15);
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 0.8rem;
+    }
+    .stat-box strong { color: var(--accent); }
+    .vs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin: 10px 0;
+    }
+    .vs-table th, .vs-table td {
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      text-align: left;
+    }
+    .vs-table th {
+      background: var(--indigo-bg);
+      color: var(--indigo);
+    }
+    footer {
+      text-align: center;
+      padding: 20px 0 10px;
+      font-size: 0.75rem;
+      color: var(--subtext);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-row">
+      <h1>📖 Разбор к семинару</h1>
+      <span class="badge">БВТ2602 • Философия</span>
+    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск (Бэкон, Декарт, Локк, Спиноза, идолы...)" oninput="filterCards()">
+    <div class="filters">
+      <button class="filter-btn active" onclick="setCategory('all', this)">Все (15)</button>
+      <button class="filter-btn" onclick="setCategory('empiricism', this)">Эмпиризм</button>
+      <button class="filter-btn" onclick="setCategory('rationalism', this)">Рационализм</button>
+      <button class="filter-btn" onclick="setCategory('comparison', this)">VS Таблица</button>
+      <button class="filter-btn" onclick="setCategory('blitz', this)">⚡ Блиц</button>
+    </div>
+  </header>
+
+  <main id="cardsContainer">
+
+    <!-- ==================== ВВОДНЫЙ ==================== -->
+    <div class="section-title" data-section="intro">🧭 Контекст эпохи XVII века</div>
+
+    <div class="card" data-category="intro" data-keywords="новое время научная революция механицизм метод познания ньютон галилей">
+      <div class="card-header">
+        <span class="num-pill">01</span>
+        <div class="card-title">Главный нерв XVII века: Поиск безошибочного метода познания</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«XVII век — эпоха Первой научной революции (Галилей, Кеплер, Ньютон) и утверждения механистической картины мира. Философия сменила фокус с теологии на гносеологию (теорию познания). Главный вопрос эпохи: каков универсальный научный метод постижения законов природы?»</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Раньше спорили по цитатам из Библии и Аристотеля. В XVII веке изобрели телескоп, микроскоп и механику. Возник вопрос: как правильно добывать факты, чтобы не ошибаться? Англичане (Бэкон, Локк) сказали: «глазами и руками через опыты!». Французы и немцы (Декарт, Спиноза) сказали: «головой через строгую математику!».
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: XVII век = поиск научного метода. Разлом на эмпиризм (опыт) и рационализм (разум).</span>
+      </div>
+    </div>
+
+    <!-- ==================== ЭМПИРИЗМ ==================== -->
+    <div class="section-title" data-section="empiricism">🌱 Направление 1: Английский эмпиризм (Бэкон, Локк, Гоббс)</div>
+
+    <div class="card" data-category="empiricism" data-keywords="фрэнсис бэкон знание сила новый органон индукция опыты наука практика">
+      <div class="card-header">
+        <span class="num-pill">02</span>
+        <div class="card-title">Фрэнсис Бэкон: «Знание — сила» и метод индукции</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Фрэнсис Бэкон — родоначальник английского эмпиризма. Провозгласил примат практики: "Знание — сила" (Scientia potentia est). В трактате "Новый Органон" предложил заменить силлогистику Аристотеля методом научной индукции — постепенным восхождением от единичных опытных наблюдений к общим законам».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Наука нужна не ради пыльных трактатов, а чтобы делать компасы, порох и станки. Метод индукции работает снизу-вверх: нагрей 50 разных металлов, посмотри, что каждый расширился, и только на базе опытов скажи: «все металлы расширяются при нагреве».
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: «Знание — сила». Индукция = восхождение снизу-вверх: от опыта к закону.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="empiricism" data-keywords="бэкон 4 идола призраки разума рода пещеры площади театра заблуждения ошибки">
+      <div class="card-header">
+        <span class="num-pill">03</span>
+        <div class="card-title">Бэкон: 4 идола (призрака) разума (Топ-вопрос преподов)</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Бэкон классифицировал 4 типа систематических заблуждений, искажающих чистоту познания: 1) Идолы Рода (несовершенство биологии человека); 2) Идолы Пещеры (субъективность личного воспитания); 3) Идолы Площади (неточность слов и языка); 4) Идолы Театра (догматическая вера в авторитеты)».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        <div class="quick-stats">
+          <div class="stat-box"><strong>Рода:</strong> Глаза видят мираж, мозг ищет знаки (ограниченность вида).</div>
+          <div class="stat-box"><strong>Пещеры:</strong> Личный характер, семья, узкий кругозор («каждый в своей норе»).</div>
+          <div class="stat-box"><strong>Площади:</strong> Пустые слова, споры о терминах, речевые штампы.</div>
+          <div class="stat-box"><strong>Театра:</strong> Слепое поклонение кумирам и старым догмам.</div>
+        </div>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Род = биология; Пещера = личность; Площадь = болтовня; Театр = культ авторитетов.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="empiricism" data-keywords="бэкон три пути паук муравей пчела познание ученый">
+      <div class="card-header">
+        <span class="num-pill">04</span>
+        <div class="card-title">Бэкон: Три пути познания (паук, муравей, пчела)</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Бэкон выделил три стратегии научного поиска: 1) Путь паука — бесплодное выведение теорий из собственного ума без фактов (схоластика); 2) Путь муравья — бессистемное накопление единичных фактов (узкий эмпиризм); 3) Путь пчелы — сбор опытного материала и его глубокая теоретическая переработка разумом (истинная наука)».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Паук плетёт паутину из своего брюха (догматики-теоретики). Муравей тащит в кучу щепки и мошек, не зная зачем (чистые практики). Пчела собирает нектар с полей и внутри себя превращает в мёд (идеальный ученый).
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Идеальный исследователь — пчела: собрал опыт руками, осмыслил головой.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="empiricism" data-keywords="джон локк сенсуализм табула раса чистая доска опыт ощущения рефлексия">
+      <div class="card-header">
+        <span class="num-pill">05</span>
+        <div class="card-title">Джон Локк: Сенсуализм и Tabula Rasa («чистая доска»)</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Джон Локк — основоположник классического сенсуализма: "Нет ничего в разуме, чего не было бы прежде в чувствах". Отрицал врождённые идеи: душа новорождённого — это Tabula rasa (чистая доска). Знание образуется из двух источников опыта: внешнего (ощущения) и внутреннего (рефлексия — наблюдение ума за собой)».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Никаких готовых математических формул или идеи Бога в голове младенца с рождения нет. Мозг при рождении — чистая форматированная флешка. Что жизнь через глаза, уши и руки запишет — то там и будет.
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Tabula rasa = чистый лист. Никаких врождённых идей, всё от чувств и рефлексии.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="empiricism" data-keywords="локк качества первичные вторичные масса протяженность форма цвет вкус запах">
+      <div class="card-header">
+        <span class="num-pill">06</span>
+        <div class="card-title">Локк: Первичные и вторичные качества вещей</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Локк разделил качества тел на: 1) Первичные (объективные) — неразрывно присущи самим вещам (протяженность, форма, плотность, движение, покой, число); 2) Вторичные (субъективные) — порождаются в органах чувств человека под воздействием первичных (цвет, звук, вкус, запах, температура)».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        У яблока на столе реально есть масса 150 грамм и форма шара (первичные свойства). Но вкуса и красного цвета у него в темноте нет — сладость и краснота появляются только тогда, когда человек кусает его зубами и смотрит глазом (вторичные свойства).
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Первичные (масса, форма) — объективны в вещах. Вторичные (цвет, вкус) — в наших рецепторах.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="empiricism" data-keywords="томас гоббс материализм механицизм левиафан общественный договор война всех против всех">
+      <div class="card-header">
+        <span class="num-pill">07</span>
+        <div class="card-title">Томас Гоббс: Механистический материализм и государство</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Томас Гоббс радикализировал материализм: мир — это совокупность материальных тел, подчиняющихся законам геометрии и механики (даже человек — живой автомат). В трактате "Левиафан" вывел теорию общественного договора: чтобы прекратить естественное состояние "войны всех против всех", люди добровольно передали права государству».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Душа — это просто движение частиц внутри тела. Без законов и полиции люди бы перегрызли друг друга («человек человеку волк»). Поэтому общество скинулось властью и создало монстра-государство (Левиафана), чтобы тот охранял порядок.
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Мир как механизм. «Война всех против всех» ➔ Государство-Левиафан по договору.</span>
+      </div>
+    </div>
+
+    <!-- ==================== РАЦИОНАЛИЗМ ==================== -->
+    <div class="section-title" data-section="rationalism">📐 Направление 2: Континентальный рационализм (Декарт, Спиноза, Лейбниц)</div>
+
+    <div class="card" data-category="rationalism" data-keywords="рене декарт рационализм дедукция аксиомы математика метод">
+      <div class="card-header">
+        <span class="num-pill">08</span>
+        <div class="card-title">Рене Декарт: Рационализм и метод дедукции</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Рене Декарт — родоначальник континентального рационализма. Отверг чувственный опыт как обманчивый и нестабильный. Истинный метод — дедукция: строгое логическое выведение частных следствий из самоочевидных, ясных и отчётливых аксиом разума (clarus et distinctus) по образцу геометрии».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Глаза видят, что палка в воде сломана, а Солнце размером с монету бегает по небу. Чувства врут! Верить можно только чистой логике разума и строгой математике: берем очевидную аксиому и логически доказываем теоремы.
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Рационализм: разум выше чувств. Дедукция = сверху-вниз: от аксиом к выводам.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="rationalism" data-keywords="декарт когито эрго сум cogito ergo sum сомневаюсь мыслю существую сомнение">
+      <div class="card-header">
+        <span class="num-pill">09</span>
+        <div class="card-title">Декарт: Методологическое сомнение и «Cogito, ergo sum»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Методологическое сомнение Декарта: чтобы построить нерушимую науку, необходимо усомниться во всём чувственном мире и авторитетах. Единственный факт, в котором усомниться невозможно — само моё сомнение. Сомнение есть мышление. Отсюда нерушимый первопринцип: "Cogito, ergo sum" ("Я мыслю, следовательно, я существую")».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Вдруг я сплю или нахожусь в Матрице? Я могу усомниться в наличии у меня рук, ног и стен комнаты. Но чтобы сомневаться, должен существовать ТОТ, КТО сомневается! Сам процесс моего мышления железно доказывает моё существование.
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: «Мыслю, следовательно, существую». Сомнение доказывает мысль, а мысль — существование.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="rationalism" data-keywords="декарт дуализм субстанции протяженность мышление врожденные идеи тело душа">
+      <div class="card-header">
+        <span class="num-pill">10</span>
+        <div class="card-title">Декарт: Дуализм субстанций и врождённые идеи</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Дуализм Декарта делит мир на две независимые сотворённые субстанции: 1) Материальную (атрибут — протяжённость, res extensa); 2) Духовную (атрибут — мышление, res cogitans). В разуме изначально присутствуют врождённые идеи (идея Бога как совершенства, логические законы, базовые математические аксиомы)».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Тело — это железный механизм с рычагами (занимает место в пространстве). Душа — нематериальная мысль без веса и объема. В отличие от Локка, Декарт уверен: базовый софт уже прошит в наш процессор с завода Творцом.
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Дуализм = тело (протяжённость) + душа (мышление). Врождённые идеи заложены Творцом.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="rationalism" data-keywords="бенедикт спиноза монизм субстанция пантеизм деус сиве натура природа модусы атрибуты">
+      <div class="card-header">
+        <span class="num-pill">11</span>
+        <div class="card-title">Бенедикт Спиноза: Пантеистический монизм («Бог, или Природа»)</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Спиноза преодолел картезианский дуализм учением о единой бесконечной Субстанции: "Бог, или Природа" (Deus sive Natura). Субстанция есть причина самой себя (causa sui). Мышление и протяжённость — два познаваемых атрибута единой природы, а единичные вещи и люди — её временные состояния (модусы)».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Бог — это не волшебник на облаке. Бог и Природа — это одно и то же (пантеизм). Вселенная — один гигантский океан (Субстанция), а каждый из нас, деревья и звезды — просто временные волны и рябь на воде (модусы).
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Монизм: Субстанция ОДНА («Бог, или Природа»). Мышление и тело — её стороны, вещи — модусы.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="rationalism" data-keywords="спиноза свобода осознанная необходимость детерминизм аффекты страсти">
+      <div class="card-header">
+        <span class="num-pill">12</span>
+        <div class="card-title">Спиноза: «Свобода — это осознанная необходимость»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«В мире Спинозы царит строгий детерминизм: случайность — лишь мера нашего незнания причин. Истинная свобода — это не произвол и потакание страстям (рабство аффектов), а "осознанная необходимость": глубокое разумное познание законов бытия и добровольное согласие жить по ним».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Если ты психуешь и делаешь глупости назло — ты не свободен, ты раб своих гормонов и комплексов. Свободен тот, кто понял законы природы, перестал обижаться на неизбежное и действует умно и спокойно.
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Свобода = понимание законов природы и действие по разуму, а не рабство слепых страстей.</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="rationalism" data-keywords="готфрид лейбниц монадология монады плюрализм предустановленная гармония лучший из миров">
+      <div class="card-header">
+        <span class="num-pill">13</span>
+        <div class="card-title">Готфрид Лейбниц: Монадология и лучший из миров</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 В ответе на паре (строго):</div>
+        <strong>«Лейбниц создал плюралистический рационализм: первооснова мира — бесконечное множество неделимых духовных единиц бытия (монад). Монады "не имеют окон" (не контактируют механически), но согласованы Творцом через "предустановленную гармонию". Наш мир — "лучший из всех возможных миров"».</strong>
+      </div>
+      <div class="simple-block">
+        <div class="simple-label">🗣️ Простыми словами:</div>
+        Представь миллиард изолированных часов, которые тикают идеально синхронно, потому что Великий Часовщик изначально заложил идеальный код. Материя делима, а вот монады — неделимые духовные процессоры Вселенной.
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Маячок: Монады = духовные атомы без окон. Предустановленная гармония = идеальная синхронизация.</span>
+      </div>
+    </div>
+
+    <!-- ==================== СРАВНИТЕЛЬНАЯ ТАБЛИЦА ==================== -->
+    <div class="section-title" data-section="comparison">⚖️ Сравнительная таблица: Эмпиризм vs Рационализм</div>
+
+    <div class="card" data-category="comparison" data-keywords="сравнение таблица эмпиризм рационализм бэкон декарт метод индукция дедукция">
+      <div class="card-header">
+        <span class="num-pill">VS</span>
+        <div class="card-title">Сводный баттл направлений XVII века</div>
+      </div>
+      <div class="simple-block">
+        <table class="vs-table">
+          <thead>
+            <tr>
+              <th>Параметр</th>
+              <th>Эмпиризм (Бэкон, Локк)</th>
+              <th>Рационализм (Декарт, Спиноза)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Источник истины</strong></td>
+              <td>Чувственный опыт, эксперимент</td>
+              <td>Чистый разум, логика</td>
+            </tr>
+            <tr>
+              <td><strong>Главный метод</strong></td>
+              <td><strong>Индукция</strong> (снизу-вверх: от фактов к закону)</td>
+              <td><strong>Дедукция</strong> (сверху-вниз: от аксиом к выводам)</td>
+            </tr>
+            <tr>
+              <td><strong>Идеи в уме</strong></td>
+              <td>«Чистая доска» (Tabula rasa)</td>
+              <td>Врождённые идеи («свет разума»)</td>
+            </tr>
+            <tr>
+              <td><strong>Эталон науки</strong></td>
+              <td>Опытная физика, химия</td>
+              <td>Геометрия Евклида, математика</td>
+            </tr>
+            <tr>
+              <td><strong>Число субстанций</strong></td>
+              <td>Материальные тела (Гоббс)</td>
+              <td>Декарт — 2, Спиноза — 1, Лейбниц — $\infty$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="beacon">
+        <span class="beacon-icon">💡</span>
+        <span>Суть спора: Наука от наблюдения за природой (Англия) ИЛИ от строгой математики разума (Европа).</span>
+      </div>
+    </div>
+
+    <!-- ==================== БЛИЦ-ОТВЕТЫ ==================== -->
+    <div class="section-title" data-section="blitz">⚡ Блиц-ответы на каверзные вопросы преподавателя</div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц вопрос бэкон декарт метод вектор индукция дедукция">
+      <div class="card-header">
+        <span class="num-pill">Q1</span>
+        <div class="card-title">«В чём разница логических векторов индукции и дедукции?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Коронный ответ на 5+:</div>
+        <strong>«Бэконовская индукция идёт СНИЗУ-ВВЕРХ: от единичных опытов синтезирует общий закон. Картезианская дедукция идёт СВЕРХУ-ВНИЗ: из самоочевидных первопринципов разума логически выводит следствия».</strong>
+      </div>
+    </div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц вопрос локк декарт спор врожденные идеи душа кант">
+      <div class="card-header">
+        <span class="num-pill">Q2</span>
+        <div class="card-title">«Кто победил в споре о врождённых идеях: Локк или Декарт?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Коронный ответ на 5+:</div>
+        <strong>«Их синтезировал Кант в XVIII в.: Локк был прав, что всё содержание знания даёт чувственный опыт. Но Декарт был прав, что сам способ структурирования этого опыта (пространство, время, логика) заложен в разуме априорно».</strong>
+      </div>
+    </div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц вопрос спиноза свобода необходимость рабство страстей">
+      <div class="card-header">
+        <span class="num-pill">Q3</span>
+        <div class="card-title">«Почему Спиноза назвал свободу "осознанной необходимостью"?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Коронный ответ на 5+:</div>
+        <strong>«Потому что в природе нет случайностей. Свободен не тот, кто действует по слепому капризу (это рабство страстей), а тот, кто силой разума познал объективные законы мира и сознательно согласует с ними свои решения».</strong>
+      </div>
+    </div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц вопрос субстанции декарт спиноза лейбниц монизм дуализм плюрализм">
+      <div class="card-header">
+        <span class="num-pill">Q4</span>
+        <div class="card-title">«Сколько субстанций признавали Декарт, Спиноза и Лейбниц?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Коронный ответ на 5+:</div>
+        <strong>«Декарт — дуалист (2 субстанции: материя и дух). Спиноза — монист (1 единая субстанция: "Бог, или Природа"). Лейбниц — плюралист (бесконечное множество духовных монад)».</strong>
+      </div>
+    </div>
+
+    <div class="card" data-category="blitz" data-keywords="блиц вопрос бэкон паук муравей пчела почему пчела">
+      <div class="card-header">
+        <span class="num-pill">Q5</span>
+        <div class="card-title">«Почему Бэкон ругал путь паука и муравья?»</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">📌 Коронный ответ на 5+:</div>
+        <strong>«Паук производит теории без реальных фактов (схоластика). Муравей тащит факты вслепую без теоретического осмысления (узкий практицизм). Истина — у пчелы: сбор опытного материала плюс его переработка силой разума».</strong>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    Бородин Леонид • МТУСИ • гр. БВТ2602 • Семинар: Рационализм и Эмпиризм XVII в.
+  </footer>
+
+  <script>
+    let activeCategory = 'all';
+
+    function setCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterCards();
+    }
+
+    function filterCards() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      const sections = document.querySelectorAll('.section-title');
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+        const text = card.innerText.toLowerCase();
+
+        const matchesCat = (activeCategory === 'all') || (cat === activeCategory);
+        const matchesQuery = !q || keywords.includes(q) || text.includes(q);
+
+        if (matchesCat && matchesQuery) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      sections.forEach(sec => {
+        const secCat = sec.getAttribute('data-section');
+        if (activeCategory !== 'all' && activeCategory !== secCat) {
+          sec.style.display = 'none';
+        } else {
+          const hasVisible = Array.from(cards).some(c => 
+            c.getAttribute('data-category') === secCat && !c.classList.contains('hidden')
+          );
+          sec.style.display = hasVisible ? 'flex' : 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

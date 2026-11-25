@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Шпаргалка по философии</title>
+  <style>
+    :root {
+      --bg: #121316;
+      --card-bg: #1c1e24;
+      --text: #e2e4e9;
+      --accent: #ffb74d;
+      --subtext: #9aa0a6;
+      --highlight: #81c784;
+      --border: #2c2f38;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f5f7;
+        --card-bg: #ffffff;
+        --text: #1d1d1f;
+        --accent: #d97706;
+        --subtext: #6b7280;
+        --highlight: #15803d;
+        --border: #e5e7eb;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 12px;
+      line-height: 1.45;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      padding-bottom: 8px;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .badge {
+      font-size: 0.75rem;
+      background: var(--border);
+      color: var(--text);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+    }
+    .term-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .era {
+      font-size: 0.75rem;
+      color: var(--subtext);
+      font-weight: normal;
+    }
+    .core {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .beacon {
+      font-size: 0.85rem;
+      color: var(--highlight);
+      border-top: 1px dashed var(--border);
+      padding-top: 4px;
+      margin-top: 4px;
+    }
+    .hidden { display: none !important; }
+    .empty-notice {
+      text-align: center;
+      padding: 30px;
+      color: var(--subtext);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>⚡ Шпаргалка: Философия <span id="count" class="badge">65 терминов</span></h1>
+  <input type="text" id="search" placeholder="Быстрый поиск термина или имени..." autofocus>
+</header>
+
+<main id="terms-list">
+
+  <!-- А -->
+  <div class="card" data-term="агностицизм кант юм">
+    <div class="term-title">Агностицизм <span class="era">Кант, Юм</span></div>
+    <div class="core">Сущность мира принципиально непознаваема человеком.</div>
+    <div class="beacon">💡 Познаем лишь явления (феномены), «вещь-в-себе» скрыта.</div>
+  </div>
+
+  <div class="card" data-term="аксиология ценности">
+    <div class="term-title">Аксиология <span class="era">Раздел</span></div>
+    <div class="core">Философское учение о природе и происхождении ценностей (добро, красота, справедливость).</div>
+  </div>
+
+  <div class="card" data-term="антропоморфизм миф боги">
+    <div class="term-title">Антропоморфизм <span class="era">Миф / Досократики</span></div>
+    <div class="core">Наделение сил природы, вещей и богов человеческими чертами и эмоциями.</div>
+    <div class="beacon">💡 Философия началась с отказа от антропоморфизма («от мифа к Логосу»).</div>
+  </div>
+
+  <div class="card" data-term="апория зенон элейский ахиллес стрела">
+    <div class="term-title">Апория <span class="era">Зенон Элейский</span></div>
+    <div class="core">Трудноразрешимый логический тупик или парадокс.</div>
+    <div class="beacon">💡 «Ахиллес и черепаха», «Стрела» — доказательство неподвижности бытия.</div>
+  </div>
+
+  <div class="card" data-term="аскетизм киники стоики диоген">
+    <div class="term-title">Аскетизм <span class="era">Киники, Стоики</span></div>
+    <div class="core">Отказ от телесных благ и удовольствий ради независимости и духовных целей.</div>
+    <div class="beacon">💡 Диоген в бочке (пифосе), сведение потребностей к нулю.</div>
+  </div>
+
+  <div class="card" data-term="атомизм демокрит эпикур левкипп атомы">
+    <div class="term-title">Атомизм <span class="era">Демокрит, Эпикур</span></div>
+    <div class="core">Мир состоит из мельчайших неделимых материальных частиц (атомов) и пустоты.</div>
+    <div class="beacon">💡 Вещи возникают при сцеплении атомов и гибнут при распаде.</div>
+  </div>
+
+  <!-- Б -->
+  <div class="card" data-term="бытие парменид элеаты">
+    <div class="term-title">Бытие <span class="era">Парменид (Онтология)</span></div>
+    <div class="core">Предельно общее понятие существования всего, что есть в реальности.</div>
+    <div class="beacon">💡 «Бытие есть, а небытия нет вовсе» (Парменид).</div>
+  </div>
+
+  <!-- Г -->
+  <div class="card" data-term="гедонизм эпикур киренаики удовольствие">
+    <div class="term-title">Гедонизм <span class="era">Эпикур, Киренаики</span></div>
+    <div class="core">Учение, признающее удовольствие и наслаждение высшим благом и целью жизни.</div>
+    <div class="beacon">💡 Киренаики — телесные радости; Эпикур — атараксия (покой души).</div>
+  </div>
+
+  <div class="card" data-term="гилозоизм фалес милет одушевленность">
+    <div class="term-title">Гилозоизм <span class="era">Милет (Фалес)</span></div>
+    <div class="core">Взгляд на всю материю как на живую, одушевленную и способную чувствовать.</div>
+    <div class="beacon">💡 Фалес: «Магнит одушевлен, потому что притягивает железо».</div>
+  </div>
+
+  <div class="card" data-term="гносеология познание эпистемология">
+    <div class="term-title">Гносеология <span class="era">Раздел</span></div>
+    <div class="core">Теория познания: изучает границы, закономерности и критерии истины.</div>
+  </div>
+
+  <div class="card" data-term="государство платон аристотель полис">
+    <div class="term-title">Государство <span class="era">Платон, Аристотель</span></div>
+    <div class="core">Политическая организация общества, обладающая верховной властью.</div>
+    <div class="beacon">💡 Платон: 3 сословия (философы, воины, ремесленники). Аристотель: «человек — существо политическое».</div>
+  </div>
+
+  <!-- Д -->
+  <div class="card" data-term="дедукция аристотель силлогизм">
+    <div class="term-title">Дедукция <span class="era">Аристотель (Логика)</span></div>
+    <div class="core">Способ рассуждения от общего правила к частному выводу.</div>
+    <div class="beacon">💡 Силлогизм: «Все люди смертны -> Сократ человек -> Сократ смертен».</div>
+  </div>
+
+  <div class="card" data-term="демиург платон тимей творец">
+    <div class="term-title">Демиург <span class="era">Платон («Тимей»)</span></div>
+    <div class="core">Божественный мастер, упорядочивающий хаос в гармоничный космос по образцу идей.</div>
+    <div class="beacon">💡 Не творец из ничего, а «ремесленник-архитектор» из готовой материи.</div>
+  </div>
+
+  <div class="card" data-term="детерминизм демокрит причинность">
+    <div class="term-title">Детерминизм <span class="era">Демокрит</span></div>
+    <div class="core">Учение о всеобщей закономерной причинной обусловленности всех явлений.</div>
+    <div class="beacon">💡 Случайностей не бывает — это лишь иллюзия нашего незнания причин.</div>
+  </div>
+
+  <div class="card" data-term="диалектика гераклит сократ противоречия">
+    <div class="term-title">Диалектика <span class="era">Гераклит, Сократ</span></div>
+    <div class="core">1) Вечное развитие через борьбу противоположностей (Гераклит). 2) Искусство спора через наводящие вопросы (Сократ).</div>
+    <div class="beacon">💡 Гераклит: «Всё течёт, всё меняется», «В одну реку нельзя войти дважды».</div>
+  </div>
+
+  <div class="card" data-term="дуализм декарт платон субстанции">
+    <div class="term-title">Дуализм <span class="era">Платон, Декарт</span></div>
+    <div class="core">Признание двух самостоятельных независимых начал: материального и духовного.</div>
+  </div>
+
+  <!-- И -->
+  <div class="card" data-term="идеализм платон гегель беркли">
+    <div class="term-title">Идеализм <span class="era">Платон, Гегель</span></div>
+    <div class="core">Признание первичным духа, сознания или идеи, а вторичным — материи.</div>
+    <div class="beacon">💡 Объективный (Платон) — Мировой разум вне людей; Субъективный (Беркли) — мир в ощущениях субъекта.</div>
+  </div>
+
+  <div class="card" data-term="индукция бэкон новый органон опыт">
+    <div class="term-title">Индукция <span class="era">Новое время (Ф. Бэкон)</span></div>
+    <div class="core">Способ рассуждения от единичных опытных фактов к общему научному закону.</div>
+    <div class="beacon">💡 Главный метод научного эмпиризма Бэкона («Новый Органон»).</div>
+  </div>
+
+  <div class="card" data-term="истина аристотель">
+    <div class="term-title">Истина <span class="era">Гносеология</span></div>
+    <div class="core">Знание, объективно соответствующее реальной действительности.</div>
+  </div>
+
+  <!-- К -->
+  <div class="card" data-term="концептуализм абеляр универсалии">
+    <div class="term-title">Концептуализм <span class="era">Схоластика (Абеляр)</span></div>
+    <div class="core">Позиция в споре об универсалиях: общие понятия существуют только в уме человека как понятия-концепты.</div>
+  </div>
+
+  <div class="card" data-term="космоцентризм античность гармония">
+    <div class="term-title">Космоцентризм <span class="era">Античность</span></div>
+    <div class="core">Восприятие мира как прекрасного, гармоничного, одушевленного и упорядоченного Космоса.</div>
+    <div class="beacon">💡 Человек — микрокосм, отражающий законы макрокосма.</div>
+  </div>
+
+  <div class="card" data-term="креационизм бог творение">
+    <div class="term-title">Креационизм <span class="era">Средневековье</span></div>
+    <div class="core">Учение о сотворении мира Богом «из ничего» (creatio ex nihilo) по свободной воле.</div>
+  </div>
+
+  <!-- Л -->
+  <div class="card" data-term="логика аристотель органон">
+    <div class="term-title">Логика <span class="era">Аристотель</span></div>
+    <div class="core">Наука о законах и формах правильного доказательного мышления («Органон»).</div>
+  </div>
+
+  <div class="card" data-term="логос гераклит стоики разум закон">
+    <div class="term-title">Логос <span class="era">Гераклит, Стоики</span></div>
+    <div class="core">Слово, смысл, мировой разум и объективный закон, упорядочивающий вселенную.</div>
+    <div class="beacon">💡 Мировой «программный код», превращающий хаос в порядок.</div>
+  </div>
+
+  <!-- М -->
+  <div class="card" data-term="майевтика сократ метод истина">
+    <div class="term-title">Майевтика <span class="era">Сократ</span></div>
+    <div class="core">Метод Сократа: помощь собеседнику «родить» скрытую истину через наводящие вопросы и диалог.</div>
+    <div class="beacon">💡 «Повивальное искусство» духа; «Я знаю только то, что ничего не знаю».</div>
+  </div>
+
+  <div class="card" data-term="материализм демокрит бэкон маркс">
+    <div class="term-title">Материализм <span class="era">Демокрит, Маркс</span></div>
+    <div class="core">Признание материи первичной, а сознания — вторичным продуктом её развития.</div>
+  </div>
+
+  <div class="card" data-term="материя аристотель субстанция">
+    <div class="term-title">Материя <span class="era">Онтология / Аристотель</span></div>
+    <div class="core">Объективная реальность; у Аристотеля — пассивная возможность бытия (потенция).</div>
+  </div>
+
+  <div class="card" data-term="метафизика аристотель первоначала">
+    <div class="term-title">Метафизика <span class="era">Аристотель</span></div>
+    <div class="core">1) «Первая философия» — учение о первоначалах бытия за пределами физики. 2) Взгляд на мир вне развития (антипод диалектики).</div>
+  </div>
+
+  <div class="card" data-term="метод методология бэкон декарт">
+    <div class="term-title">Метод и Методология <span class="era">Новое время</span></div>
+    <div class="core">Метод — путь достижения исследовательской цели; методология — учение о принципах и структуре научного поиска.</div>
+  </div>
+
+  <div class="card" data-term="мировоззрение взгляды уровни">
+    <div class="term-title">Мировоззрение <span class="era">Базовое понятие</span></div>
+    <div class="core">Целостная система взглядов человека на мир и своё место в нём.</div>
+    <div class="beacon">💡 Исторические типы: миф -> религия -> философия -> наука.</div>
+  </div>
+
+  <div class="card" data-term="миф мифология синкретизм">
+    <div class="term-title">Миф <span class="era">Древнее сознание</span></div>
+    <div class="core">Древнее образное сказание о богах и мире, объединяющее фантазию, веру и зачатки знаний.</div>
+  </div>
+
+  <div class="card" data-term="монизм спиноза фалес первоначало">
+    <div class="term-title">Монизм <span class="era">Онтология</span></div>
+    <div class="core">Учение, объясняющее всё единство мира через одно-единственное первоначало.</div>
+  </div>
+
+  <!-- Н -->
+  <div class="card" data-term="натурфилософия досократики фалес анаксимен архэ">
+    <div class="term-title">Натурфилософия <span class="era">Досократики (VII–V вв. до н.э.)</span></div>
+    <div class="core">Ранняя философия природы; поиск материальной первоосновы (архэ).</div>
+    <div class="beacon">💡 Фалес — вода, Анаксимен — воздух, Анаксимандр — апейрон, Гераклит — огонь.</div>
+  </div>
+
+  <div class="card" data-term="неоплатонизм плотин единое эманация">
+    <div class="term-title">Неоплатонизм <span class="era">Плотин (III в. н.э.)</span></div>
+    <div class="core">Учение о ступенях бытия, нисходящих от непостижимого Единого к материи.</div>
+    <div class="beacon">💡 Иерархия: Единое -> Мировой Ум -> Мировая Душа -> Материя (тьма).</div>
+  </div>
+
+  <div class="card" data-term="номинализм оккам универсалии имя">
+    <div class="term-title">Номинализм <span class="era">Схоластика (Оккам)</span></div>
+    <div class="core">Универсалии (общие понятия) — это лишь пустые имена-ярлыки (nomina). Реальны только единичные вещи.</div>
+  </div>
+
+  <!-- О -->
+  <div class="card" data-term="объективный идеализм платон гегель">
+    <div class="term-title">Объективный идеализм <span class="era">Платон, Гегель</span></div>
+    <div class="core">Первичен сверхчеловеческий духовный абсолют (мир идей Платона, Абсолютный дух Гегеля).</div>
+  </div>
+
+  <div class="card" data-term="онтология бытие сущее">
+    <div class="term-title">Онтология <span class="era">Раздел</span></div>
+    <div class="core">Фундаментальный раздел философии: учение о бытии, его структуре и первоначалах.</div>
+  </div>
+
+  <div class="card" data-term="откровение бог писание">
+    <div class="term-title">Откровение <span class="era">Средневековье</span></div>
+    <div class="core">Божественная истина, открытая людям свыше через Священное Писание; выше разума.</div>
+  </div>
+
+  <!-- П -->
+  <div class="card" data-term="патристика августин блаженный отцы церкви">
+    <div class="term-title">Патристика <span class="era">Августин Блаженный (II–VIII вв.)</span></div>
+    <div class="core">Учения «отцов церкви», заложившие христианские догматы.</div>
+    <div class="beacon">💡 Августин: «Веруй, чтобы понимать», трактат «О граде Божием».</div>
+  </div>
+
+  <div class="card" data-term="платонизм платон мир идей анамнезис">
+    <div class="term-title">Платонизм <span class="era">Платон</span></div>
+    <div class="core">Удвоение реальности: подлинный вечный мир идей (эйдосов) и призрачный мир чувственных вещей.</div>
+    <div class="beacon">💡 Вещи — тени идей. Познание — припоминание душой мира идей (анамнезис).</div>
+  </div>
+
+  <div class="card" data-term="плюрализм эмпедокл анаксагор стихии">
+    <div class="term-title">Плюрализм <span class="era">Эмпедокл, Анаксагор</span></div>
+    <div class="core">Признание множества независимых первоначал мира (4 стихии, семена-гомеомерии).</div>
+  </div>
+
+  <div class="card" data-term="понятие суждение умозаключение формы логика">
+    <div class="term-title">Понятие / Суждение / Умозаключение <span class="era">Формы мышления</span></div>
+    <div class="core">Понятие — мысль о сути предмета; Суждение — утверждение/отрицание связи; Умозаключение — логический вывод из посылок.</div>
+  </div>
+
+  <div class="card" data-term="причины аристотель 4 причины бытия">
+    <div class="term-title">4 причины бытия <span class="era">Аристотель</span></div>
+    <div class="core">1) Материальная (из чего); 2) Формальная (суть, форма); 3) Действующая (источник движения); 4) Целевая / энтелехия (ради чего).</div>
+  </div>
+
+  <!-- Р -->
+  <div class="card" data-term="реализм фома аквинский универсалии">
+    <div class="term-title">Реализм <span class="era">Схоластика (Фома Аквинский)</span></div>
+    <div class="core">Универсалии (общие понятия) существуют реально до и вне конкретных вещей (как замысел Бога).</div>
+  </div>
+
+  <div class="card" data-term="релятивизм софисты протагор">
+    <div class="term-title">Релятивизм <span class="era">Софисты (Протагор)</span></div>
+    <div class="core">Учение об относительности и условности любого знания и моральных норм.</div>
+    <div class="beacon">💡 Протагор: «Человек есть мера всех вещей».</div>
+  </div>
+
+  <!-- С -->
+  <div class="card" data-term="сенсуализм локк тайна тайн табula rasa ощущения">
+    <div class="term-title">Сенсуализм <span class="era">Новое время (Джон Локк)</span></div>
+    <div class="core">Чувственные ощущения — единственный источник и основа всех знаний.</div>
+    <div class="beacon">💡 «Нет ничего в разуме, чего не было бы в чувствах». Разум при рождении — «чистая доска» (tabula rasa).</div>
+  </div>
+
+  <div class="card" data-term="скептицизм пиррон эпохе атараксия">
+    <div class="term-title">Скептицизм <span class="era">Пиррон</span></div>
+    <div class="core">Сомнение в возможности достоверного познания; воздержание от категоричных суждений (эпохе).</div>
+    <div class="beacon">💡 Цель — атараксия (душевное спокойствие).</div>
+  </div>
+
+  <div class="card" data-term="софистика протагор горгий споры софизмы">
+    <div class="term-title">Софистика <span class="era">Протагор, Горгий</span></div>
+    <div class="core">Платное обучение красноречию и искусству побеждать в спорах любой ценой с помощью логических уловок (софизмов).</div>
+  </div>
+
+  <div class="card" data-term="стоицизм сенека марк аврелий зенон китийский апатия">
+    <div class="term-title">Стоицизм <span class="era">Зенон Китийский, Сенека, Марк Аврелий</span></div>
+    <div class="core">Мужество, самообладание, стойкость перед судьбой и подчинение разуму (Логосу).</div>
+    <div class="beacon">💡 Идеал — апатия (бесстрастие). «Желающего судьба ведёт, нежелающего — тащит».</div>
+  </div>
+
+  <div class="card" data-term="субстанция спиноза декарт первооснова">
+    <div class="term-title">Субстанция <span class="era">Онтология</span></div>
+    <div class="core">Самодостаточная первооснова бытия, не зависящая ни от чего другого.</div>
+  </div>
+
+  <div class="card" data-term="сущность явление категории диалектики">
+    <div class="term-title">Сущность и Явление <span class="era">Диалектика</span></div>
+    <div class="core">Сущность — скрытая внутренняя природа вещи (постигается разумом); явление — её внешнее чувственное проявление.</div>
+  </div>
+
+  <div class="card" data-term="схоластика фома аквинский томизм средние века">
+    <div class="term-title">Схоластика <span class="era">Фома Аквинский (XI–XIV вв.)</span></div>
+    <div class="core">Средневековая философия, стремившаяся рационально доказать догматы веры с помощью логики Аристотеля.</div>
+    <div class="beacon">💡 «Философия — служанка богословия». 5 доказательств бытия Бога.</div>
+  </div>
+
+  <!-- Т -->
+  <div class="card" data-term="теодицея оправдание бога зло">
+    <div class="term-title">Теодицея <span class="era">Средневековье / Лейбниц</span></div>
+    <div class="core">«Оправдание Бога» — богословское объяснение наличия зла в мире при всеблагом и всемогущем Творце (вина свободной воли человека).</div>
+  </div>
+
+  <div class="card" data-term="теоцентризм бог средние века">
+    <div class="term-title">Теоцентризм <span class="era">Средневековье</span></div>
+    <div class="core">Мировоззрение, в котором Бог является центром, первопричиной и смыслом мироздания.</div>
+  </div>
+
+  <!-- У -->
+  <div class="card" data-term="универсалии спор реализм номинализм концептуализм">
+    <div class="term-title">Универсалии <span class="era">Спор схоластов</span></div>
+    <div class="core">Общие понятия («человек вообще»). Три позиции спора:</div>
+    <div class="beacon">💡 1. Реализм: существуют реально (в уме Бога). 2. Номинализм: только пустые звуки/имена. 3. Концептуализм: мысленные концепты в голове.</div>
+  </div>
+
+  <!-- Ф -->
+  <div class="card" data-term="фатализм рок судьба фатум">
+    <div class="term-title">Фатализм <span class="era">Античность / Стоики</span></div>
+    <div class="core">Вера в абсолютную неизбежность судьбы и предначертанность всех событий роком.</div>
+  </div>
+
+  <div class="card" data-term="философия пифагор любовь к мудрости">
+    <div class="term-title">Философия <span class="era">Пифагор</span></div>
+    <div class="core">«Любовь к мудрости» — теоретическое мировоззрение, изучающее систему отношений «Человек — Мир».</div>
+  </div>
+
+  <div class="card" data-term="форма материя аристотель">
+    <div class="term-title">Форма <span class="era">Аристотель</span></div>
+    <div class="core">Активное организующее начало, превращающее пассивную материю в конкретную вещь.</div>
+  </div>
+
+  <!-- Э -->
+  <div class="card" data-term="эйдос платон идея сущность">
+    <div class="term-title">Эйдос <span class="era">Платон</span></div>
+    <div class="core">Идеальная бестелесная сущность и вечный совершенный прообраз материальной вещи.</div>
+  </div>
+
+  <div class="card" data-term="эклектика цицерон смешение">
+    <div class="term-title">Эклектика <span class="era">Поздний Рим</span></div>
+    <div class="core">Механическое соединение разнородных, часто противоречивых философских взглядов без единой системы.</div>
+  </div>
+
+  <div class="card" data-term="элеаты парменид зенон бытие неподвижно">
+    <div class="term-title">Элеаты <span class="era">Парменид, Зенон</span></div>
+    <div class="core">Школа г. Элея: истинное бытие едино, вечно и неподвижно; чувственное движение — иллюзия.</div>
+  </div>
+
+  <div class="card" data-term="эманация плотин неоплатонизм единое солнце">
+    <div class="term-title">Эманация <span class="era">Неоплатонизм (Плотин)</span></div>
+    <div class="core">Нисхождение и излияние божественной полноты Единого вниз по ступеням бытия (подобно лучам от солнца).</div>
+  </div>
+
+  <div class="card" data-term="эмпиризм бэкон знание сила опыт идолы">
+    <div class="term-title">Эмпиризм <span class="era">Новое время (Ф. Бэкон)</span></div>
+    <div class="core">Учение, считающее чувственный опыт и эксперимент главным источником достоверного знания.</div>
+    <div class="beacon">💡 Бэкон: «Знание — сила». 4 идола разума (рода, пещеры, площади, театра).</div>
+  </div>
+
+  <div class="card" data-term="эпикуреизм эпикур атараксия смерть боги">
+    <div class="term-title">Эпикуреизм <span class="era">Эпикур</span></div>
+    <div class="core">Освобождение от страха смерти и богов, спокойствие духа (атараксия), умеренность и дружба.</div>
+    <div class="beacon">💡 «Пока мы есть — смерти нет, когда смерть пришла — нас уже нет».</div>
+  </div>
+
+  <div class="card" data-term="эсхатология страшный суд конец времен">
+    <div class="term-title">Эсхатология <span class="era">Средневековье</span></div>
+    <div class="core">Религиозное учение о конце времен, Страшном суде и конечной участи мира и человека.</div>
+  </div>
+
+  <div class="card" data-term="этика аристотель добродетель мораль">
+    <div class="term-title">Этика <span class="era">Аристотель</span></div>
+    <div class="core">Философская наука о морали, добре и долге. Добродетель как «золотая середина» между крайностями.</div>
+  </div>
+
+</main>
+
+<div id="no-results" class="empty-notice hidden">Ничего не найдено 🔍</div>
+
+<script>
+  const searchInput = document.getElementById('search');
+  const cards = document.querySelectorAll('.card');
+  const countBadge = document.getElementById('count');
+  const noResults = document.getElementById('no-results');
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const text = (card.getAttribute('data-term') + ' ' + card.innerText).toLowerCase();
+      if (!q || text.includes(q)) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    countBadge.textContent = `${visibleCount} из ${cards.length}`;
+    if (visibleCount === 0) {
+      noResults.classList.remove('hidden');
+    } else {
+      noResults.classList.add('hidden');
+    }
+  });
+</script>
+
+</body>
+</html>
