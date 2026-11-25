@@ -20,6 +20,8 @@ llm/outputs/*
 # Common system files
 .DS_Store
 Thumbs.db
+~$*
+*.lnk
 
 # Language/build artifacts (extend for a lab or project)
 node_modules/
